@@ -17,14 +17,22 @@ const ToastSchema = new Schema(
       required: [true, 'Please add a toastee'],
     },
     arcteryxProduct: {
-        type: String,
-        required: [true, 'Please specify an arcteryx product']
+      type: String,
+      required: [true, 'Please specify an arcteryx product']
+    },
+    arcteryxStore: {
+      type: String
     },
     content: {
         type: String
     },
     likes: {
-      type: Number
+      type: Number,
+      default: 0
+    },
+    viewed: {
+      type: Boolean,
+      default: false
     }
   },
   { timestamps: true },
