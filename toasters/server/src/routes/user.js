@@ -24,7 +24,6 @@ router.get('/', async (req, res) => {
     } else {
         users = await User.find();
     }
-    console.log(users);
 
     res.status(200).send(users);
 })
