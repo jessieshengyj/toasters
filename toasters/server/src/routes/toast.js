@@ -40,10 +40,14 @@ router.get('/', async (req, res) => {
 });
 
 router.patch('/:id', async (req, res) => {
-    console.log('here');
-    const toastId = req.params.id;
+    const { toastId, userId, like } = req.body;
+
     try {
-        await Toast.findByIdAndUpdate(toastId, { $inc: { likes: 1 } }, { new: true });
+        if (like === 1) {
+            await Toast.findByIdAndUpdate(toastId, { $push: { likes: userId } }, { new: true });
+        } else {
+            await Toast.findByIdAndUpdate(toastId, { $pull: { likes: userId } }, { new: true });
+        }
 
         res.sendStatus(200);
     } catch (e) {
