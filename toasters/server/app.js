@@ -1,23 +1,24 @@
 const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
-const connectDB = require('./src/config');
+const mongoose = require('mongoose');
 
-const userInfoRoute = require('./src/routes/UserInfo');
-const toastRoute = require('./src/routes/toast')
+mongoose.connect("mongodb+srv://kevinwu:0Jtuw4asT1cbA1OG@cluster0.zpjenmv.mongodb.net/")
 
-connectDB.on('error', console.error.bind(console, 'MongoDB connection error:'));
+const toastRoute = require('./src/routes/toast');
+const userRoute = require('./src/routes/user');
 
 const app = express();
 const port = process.env.PORT || 3001;
 
 const corsOptions = {
-  origin: ['http://localhost:3000'],
+  origin: '*',
 };
 
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use('/toast', toastRoute);
+app.use('/user', userRoute);
 
 app.get('/', (req, res) => {
   res.send('Server connection established!');
