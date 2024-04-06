@@ -40,7 +40,8 @@ router.get('/', async (req, res) => {
 });
 
 router.patch('/:id', async (req, res) => {
-    const { toastId, userId, like } = req.body;
+    const toastId = req.params.id;
+    const { userId, like } = req.body;
 
     try {
         if (like === 1) {
