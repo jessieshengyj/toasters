@@ -6,7 +6,7 @@ const Toast = require('../models/toastModel');
 router.post('/', async (req, res) => {
     const { toasterId, toasteeId, content, arcteryxProduct } = req.body;
 
-    Toast.create({ toasterId, toasteeId, content, arcteryxProduct });
+    Toast.create({ toasterId, toasteeId, content, arcteryxProduct, likes: 0 });
     res.sendStatus(201);
 });
 
@@ -19,8 +19,20 @@ router.get('/', async (req, res) => {
     } else {
         toasts = await Toast.find();
     }
-    console.log(toasts);
+    
     res.status(200).send(toasts);
 });
+
+router.patch('/:id', async (req, res) => {
+    console.log('here');
+    const toastId = req.params.id;
+    try {
+        await Toast.findByIdAndUpdate(toastId, { $inc: { likes: 1 } }, { new: true });
+
+        res.sendStatus(200);
+    } catch (e) {
+        console.log(e);
+    }
+})
 
 module.exports = router;

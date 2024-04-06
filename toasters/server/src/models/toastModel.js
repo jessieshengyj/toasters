@@ -11,7 +11,6 @@ const ToastSchema = new Schema(
     toasterId: {
       type: String,
       required: [true, 'Please add a toaster'],
-      unique: true,
     },
     toasteeId: {
       type: String,
@@ -23,6 +22,9 @@ const ToastSchema = new Schema(
     },
     content: {
         type: String
+    },
+    likes: {
+      type: Number
     }
   },
   { timestamps: true },
