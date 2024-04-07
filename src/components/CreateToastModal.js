@@ -1,13 +1,23 @@
 import "./CreateToastModal.css";
 import { ArcTeryxStores } from "../utils/enums/StoreLocations";
-import { useState } from "react";
+import React, { useState } from "react";
 import { createToast } from "../services/toastService";
+import { ReactComponent as LikedToastSvg } from "../icons/liked-toast.svg";
 
 function CreateToastModal({ setNewToast }) {
   const [toasteeName, setToasteeName] = useState("");
   const [storeLocation, setStoreLocation] = useState("");
   const [recommendedProducts, setRecommendedProducts] = useState("");
   const [reasonForToast, setReasonForToast] = useState("");
+  const [submitClicked, setSubmitClicked] = useState(false);
+
+  const resetVariables = () => {
+    setToasteeName("");
+    setStoreLocation("");
+    setRecommendedProducts("");
+    setReasonForToast("");
+    setSubmitClicked(false);
+  };
 
   const handleNameChange = (event) => {
     setToasteeName(event.target.value);
@@ -26,29 +36,26 @@ function CreateToastModal({ setNewToast }) {
   };
 
   const handleCreateToast = async (event) => {
-    event.preventDefault();
-    const newToastData = {
-      toasterId: "6611b07e9cfbe6f8dd06cfe5",
-      toasteeId: "6611e78da1db4cc68288dc07",
-      content: reasonForToast,
-      arcteryxProduct: recommendedProducts,
-      arcteryxStore: storeLocation,
-    };
-    // Here you can submit the form data or perform any other actions with the saved values
-    console.log("Toastee Name:", toasteeName);
-    console.log("Store Location:", storeLocation);
-    console.log("Recommended Products:", recommendedProducts);
-    console.log("Reason for Toast:", reasonForToast);
-    console.log("new toast", newToastData);
+    // event.preventDefault();
+    setSubmitClicked(true);
 
-    try {
-      const createdToast = await createToast(newToastData);
-      console.log("Toast created:", createdToast);
-      setNewToast(createdToast);
-      // Do something with the created toast data
-    } catch (error) {
-      // Handle error if needed
-      console.error("Error creating toast:", error);
+    if (reasonForToast && storeLocation) {
+      const newToastData = {
+        toasterId: "6611b07e9cfbe6f8dd06cfe5",
+        toasteeId: "6611e78da1db4cc68288dc07",
+        content: reasonForToast,
+        arcteryxProduct: recommendedProducts,
+        arcteryxStore: storeLocation,
+      };
+
+      try {
+        const createdToast = await createToast(newToastData);
+        console.log("Toast created:", createdToast);
+        setNewToast(createdToast);
+        document.getElementById("make-toast-modal").close();
+      } catch (error) {
+        console.error("Error creating toast:", error);
+      }
     }
   };
 
@@ -57,13 +64,18 @@ function CreateToastModal({ setNewToast }) {
   return (
     <dialog id="make-toast-modal" className="modal toast-font">
       <div className="modal-box">
-        <h3 className="font-bold text-lg toast-font">Make a Toast! 🍞</h3>
+        <h3 className="font-bold text-lg toast-font flex justify-center items-center gap-4">
+          Make a Toast!
+          <LikedToastSvg />
+        </h3>
         <div className="modal-body-row">
           <div>
             <div className="label">
               <span className="label-text">Name of toastee</span>
             </div>
-            <label className="input input-bordered flex items-center gap-2">
+            <label
+              className={`input input-bordered flex items-center gap-2 ${submitClicked && !toasteeName ? "input-error" : ""}`}
+            >
               <input
                 type="text"
                 className="grow"
@@ -78,7 +90,7 @@ function CreateToastModal({ setNewToast }) {
               <span className="label-text">Location of Arc'teryx store</span>
             </div>
             <select
-              className="select select-bordered w-full"
+              className={`select select-bordered w-full ${submitClicked && !storeLocation ? "select-error" : ""}`}
               value={storeLocation}
               onChange={handleLocationChange}
             >
@@ -96,7 +108,7 @@ function CreateToastModal({ setNewToast }) {
         <div>
           <div className="label">
             <span className="label-text">
-              Products recommended by this toastee
+              Products recommended by this toastee (Optional)
             </span>
           </div>
           <label className="input input-bordered flex items-center gap-2">
@@ -114,7 +126,9 @@ function CreateToastModal({ setNewToast }) {
               Why the toastee deserves a toast:
             </span>
           </div>
-          <label className="input input-bordered flex items-center gap-2">
+          <label
+            className={`input input-bordered flex items-center gap-2 ${submitClicked && !reasonForToast ? "input-error" : ""}`}
+          >
             <input
               type="text"
               className="grow"
@@ -125,7 +139,9 @@ function CreateToastModal({ setNewToast }) {
         </div>
         <div className="modal-action justify-between">
           <form method="dialog">
-            <button className="btn-new h-10">Close</button>
+            <button className="btn-new h-10" onClick={resetVariables}>
+              Close
+            </button>
           </form>
           <button className="btn-new h-10" onClick={handleCreateToast}>
             Give a toast!

@@ -1,0 +1,19 @@
+.toast-card-description {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.card-body {
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.toast-btn {
+  &:active {
+    animation: button-pop 0s ease-out;
+    transform: scale(var(--btn-focus-scale, 0.97));
+  }
+}

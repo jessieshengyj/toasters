@@ -1,6 +1,12 @@
+:host {
+  svg {
+    @apply h-7;
+  }
+}
+
 .modal-box {
-    @apply flex flex-col gap-6;
-    min-width: fit-content;
+  @apply flex flex-col gap-6;
+  min-width: fit-content;
 }
 
 .modal-body-row {
