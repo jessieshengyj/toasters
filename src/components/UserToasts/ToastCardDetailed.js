@@ -29,7 +29,7 @@ function ToastCardDetailed({
   //     detail_description,
   //     detail_likes]);
   // })
-  const clickLikeToast = async () => {
+  const clickLikeToast = async (event) => {
     try {
       const likeChange =
         likesList.find((l) => l === userId) !== undefined ? 0 : 1;
@@ -79,7 +79,7 @@ function ToastCardDetailed({
             <div>
               <div
                 role="button"
-                className="btn btn-ghost btn-circle"
+                className="toast-btn"
                 onClick={clickLikeToast}
               >
                 <figure className="w-12">

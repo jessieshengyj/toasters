@@ -87,7 +87,7 @@ export default function ToastCard({
               <div
                 tabIndex={0}
                 role="button"
-                className="btn btn-ghost btn-circle"
+                className="toast-btn"
                 onClick={clickLikeToast}
               >
                 <figure className="w-12">

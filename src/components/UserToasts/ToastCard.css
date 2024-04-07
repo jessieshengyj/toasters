@@ -10,3 +10,10 @@
     cursor: pointer;
   }
 }
+
+.toast-btn {
+  &:active {
+    animation: button-pop 0s ease-out;
+    transform: scale(var(--btn-focus-scale, 0.97));
+  }
+}
