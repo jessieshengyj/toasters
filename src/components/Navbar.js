@@ -3,11 +3,11 @@ function Navbar() {
   return (
     <div className="navbar bg-base-100 sticky top-0">
       <div className="flex-1">
-        <a className="btn btn-ghost text-xl toast-font dashboard-title">
+        <a className="font-semibold text-xl toast-font dashboard-title">
           Dashboard
         </a>
       </div>
-      <div className="flex-none">
+      <div className="flex-none pr-4 gap-2">
         <div className="dropdown dropdown-end">
           <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
             <div className="indicator">
@@ -54,22 +54,22 @@ function Navbar() {
                   />
                 </defs>
               </svg>
-
-              <span className="badge badge-sm indicator-item">8</span>
+              {/*notification badge*/}
+              {/*<span className="badge badge-sm indicator-item">8</span>*/}
             </div>
           </div>
-          <div
-            tabIndex={0}
-            className="mt-3 z-[1] card card-compact dropdown-content w-52 bg-base-100 shadow"
-          >
-            <div className="card-body">
-              <span className="font-bold text-lg">8 Items</span>
-              <span className="text-info">Subtotal: $999</span>
-              <div className="card-actions">
-                <button className="btn btn-primary btn-block">View cart</button>
-              </div>
-            </div>
-          </div>
+          {/*<div*/}
+          {/*  tabIndex={0}*/}
+          {/*  className="mt-3 z-[1] card card-compact dropdown-content w-52 bg-base-100 shadow"*/}
+          {/*>*/}
+          {/*  <div className="card-body">*/}
+          {/*    /!*<span className="font-bold text-lg">8 Items</span>*!/*/}
+          {/*    <span className="text-info">Subtotal: $999</span>*/}
+          {/*    <div className="card-actions">*/}
+          {/*      <button className="btn btn-primary btn-block">View cart</button>*/}
+          {/*    </div>*/}
+          {/*  </div>*/}
+          {/*</div>*/}
         </div>
         <div className="dropdown dropdown-end">
           <div

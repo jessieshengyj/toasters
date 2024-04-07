@@ -1,11 +1,18 @@
 import Dashboard from "./Dashboard";
 import SidePanel from "./SidePanel";
+import {useEffect, useState} from "react";
 
 function PageLayout() {
+  const [tabIndex, setTabIndex] = useState(0);
+
+    useEffect(() => {
+        console.log('tab index', tabIndex)
+    }, [tabIndex]);
+
   return (
     <>
-      <SidePanel />
-      <Dashboard />
+      <SidePanel setSelectedTab={(index) => setTabIndex(index)} />
+      <Dashboard tabIndex={tabIndex} />
     </>
     // <div className="side-panel-left overflow-hidden">
     //   <div className="drawer lg:drawer-open overflow-hidden">

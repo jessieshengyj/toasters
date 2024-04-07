@@ -1,9 +1,13 @@
 import "./SidePanel.css";
 import { ReactComponent as ToastSvg } from "../icons/a-toast.svg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-function SidePanel() {
+function SidePanel({ setSelectedTab }) {
   const [selectedTabIndex, setSelectedTabIndex] = useState(0);
+
+  useEffect(() => {
+    setSelectedTab(selectedTabIndex);
+  }, [selectedTabIndex]);
 
   return (
     <div className="side-panel w-72 overflow-auto fixed">

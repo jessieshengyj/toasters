@@ -6,9 +6,9 @@ import EmployeeHighlights from "./EmployeeHighlights";
 import ToastList from "./UserToasts/ToastList";
 import CreateToastModal from "./CreateToastModal";
 import { getToasts } from "../services/toastService";
+import ToastingPage from "./ToastingPage";
 
-
-function Dashboard() {
+function Dashboard({ tabIndex }) {
   const [toasts, setToasts] = useState([]);
   const [newToast, setNewToast] = useState("");
   const [sortFn, setSortFn] = useState("time");
@@ -54,41 +54,45 @@ function Dashboard() {
     <div className="toast-dashboard ml-72">
       <Navbar />
       <div className="toast-body-container">
-        <EmployeeHighlights />
-        <div className="btn-option-container">
-          <div className="btn-left">
-            <button
-              className={`btn-new toast-font ${sortFn === "time" ? "btn-toast-active" : ""}`}
-              onClick={() => {
-                setSortFn("time");
-              }}
-            >
-              New
-            </button>
-            <button
-              className={`btn-new toast-font ${sortFn === "toasts" ? "btn-toast-active" : ""}`}
-              onClick={() => {
-                setSortFn("toasts");
-              }}
-            >
-              Top Toasts
-            </button>
-          </div>
-          <div className="btn-right">
-            <button
-              className="btn-new toast-font"
-              onClick={() =>
-                document.getElementById("make-toast-modal").showModal()
-              }
-            >
-              Make a Toast
-            </button>
-            <CreateToastModal setNewToast={handleNewToast} />
-          </div>
-        </div>
-        {}
-        <ToastList toasts={toasts} />
-
+        {tabIndex ? (
+          <ToastingPage />
+        ) : (
+          <>
+            <EmployeeHighlights />
+            <div className="btn-option-container">
+              <div className="btn-left">
+                <button
+                  className={`btn-new toast-font ${sortFn === "time" ? "btn-toast-active" : ""}`}
+                  onClick={() => {
+                    setSortFn("time");
+                  }}
+                >
+                  New
+                </button>
+                <button
+                  className={`btn-new toast-font ${sortFn === "toasts" ? "btn-toast-active" : ""}`}
+                  onClick={() => {
+                    setSortFn("toasts");
+                  }}
+                >
+                  Top Toasts
+                </button>
+              </div>
+              <div className="btn-right">
+                <button
+                  className="btn-new toast-font"
+                  onClick={() =>
+                    document.getElementById("make-toast-modal").showModal()
+                  }
+                >
+                  Make a Toast
+                </button>
+                <CreateToastModal setNewToast={handleNewToast} />
+              </div>
+            </div>
+            <ToastList toasts={toasts} />
+          </>
+        )}
       </div>
     </div>
   );
