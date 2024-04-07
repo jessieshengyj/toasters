@@ -4,10 +4,10 @@ const router = express.Router();
 const User = require('../models/userModel');
 
 router.post('/', async (req, res) => {
-    const { firstName, lastName, occupation, company, username, password } = req.body;
+    const { firstName, lastName, occupation, company, username, password, phone } = req.body;
 
-    User.create({ firstName, lastName, occupation, company, username, password });
-    res.sendStatus(201);
+    const user = await User.create({ firstName, lastName, occupation, company, username, password, phone });
+    res.status(201).send(user._id);
 });
 
 router.get('/', async (req, res) => {
