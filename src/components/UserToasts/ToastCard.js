@@ -16,8 +16,8 @@ export default function ToastCard({
   username,
   description,
   likes,
-  experience, 
-  toasterUsername
+  experience,
+  toasterUsername,
 }) {
   const [likesList, setLikesList] = useState(likes);
   const [showDetailModal, setShowDetailModal] = useState(false);
@@ -61,7 +61,9 @@ export default function ToastCard({
           className="card-body"
           onClick={() => {
             // setShowDetailModal(true);
-            document.getElementById(`toast-card-detailed-${timestamp}`).showModal();
+            document
+              .getElementById(`toast-card-detailed-${timestamp}`)
+              .showModal();
           }}
         >
           <div className="flex justify-between pb-8">
@@ -74,14 +76,17 @@ export default function ToastCard({
             </div>
             <div className="flex-1 pl-10">
               <h2 className="card-title pb-4">
-                {name ? `${name} - ` : ""}
-                {location}
+                A Toast to
+                {name ? ` ${name} ` : ""}
+                {location ? `(${location})` : ""}
               </h2>
               <div className="flex">
-                  <p className="text-left">{toasterUsername}</p>
-                  <p className="text-left">{date.toUTCString().split(' ').slice(0, 4).join(' ')}</p>
-                  <p className="text-left">{gear}</p>
-                  <p className="text-left">{experience}</p>
+                <p className="text-left">{toasterUsername}</p>
+                <p className="text-left">
+                  {date.toUTCString().split(" ").slice(0, 4).join(" ")}
+                </p>
+                <p className="text-left">{gear}</p>
+                <p className="text-left">{experience}</p>
               </div>
             </div>
             <div>
