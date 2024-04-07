@@ -27,12 +27,17 @@ router.get('/', async (req, res) => {
             return u._id.toString() === t.toasterId;
         });
 
-        const toastee = users.find((u) => {
-            return u._id.toString() === t.toasteeId;
-        });
+        let toastee;
+        if (t.toasteeId) {
+            toastee = users.find((u) => {
+                return u._id.toString() === t.toasteeId;
+            });
+        } else {
+            toastee = { firstName: 'Unkown' };
+        }
         t.toasterName = toaster.firstName;
         t.toasteeName = toastee.firstName;
-        console.log(t);
+
         return { ...t["_doc"], toasterName: toaster.firstName, toasteeName: toastee.firstName };
     });
     

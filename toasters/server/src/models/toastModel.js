@@ -14,7 +14,7 @@ const ToastSchema = new Schema(
     },
     toasteeId: {
       type: String,
-      required: [true, 'Please add a toastee'],
+      default: ''
     },
     arcteryxProduct: {
       type: String,
