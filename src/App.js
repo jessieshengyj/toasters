@@ -1,7 +1,21 @@
 import logo from './logo.svg';
 import './App.css';
+import sendSMS from './sms';
 
 function App() {
+
+  const handleSendMessage = () => {
+       const to = '+12269736916';
+       const body = 'Hi';
+    sendSMS(to, body)
+        .then(() => {
+          console.log('SMS sent successfully!');
+        })
+        .catch((error) => {
+          console.error('Error sending SMS:', error);
+        });
+  };
+
   return (
     <div className="App">
       <header className="App-header">
