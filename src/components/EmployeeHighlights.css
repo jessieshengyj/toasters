@@ -1,0 +1,15 @@
+.employee-highlights-container {
+  @apply flex flex-col items-center;
+
+  padding-left: 24px;
+}
+
+.employee-highlights-title {
+  @apply flex items-center w-full;
+
+  height: 80px;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 35.22px;
+  text-align: left;
+}
