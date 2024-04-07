@@ -4,7 +4,9 @@ require('dotenv').config();
 const mongoose = require('mongoose');
 
 mongoose.connect("mongodb+srv://kevinwu:0Jtuw4asT1cbA1OG@cluster0.zpjenmv.mongodb.net/")
-
+mongoose.connection.on('connected', () => {
+  console.log('MongoDB connected successfully');
+});
 const toastRoute = require('./src/routes/toast');
 const userRoute = require('./src/routes/user');
 

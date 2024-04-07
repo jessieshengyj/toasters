@@ -1,8 +1,34 @@
-import React from 'react';
-import { ReactComponent as TestSvg } from "../../icons/toast-upvote-icon.svg";
+import React, { useState, useEffect } from 'react';
+import { ReactComponent as UnlikedToastSvg } from "../../icons/toast-upvote-icon.svg";
+import { ReactComponent as LikedToastSvg } from "../../icons/liked-toast.svg";
 
-export default function ToastCard({ name, location, gear, timestamp, username, description, likes }) {
+import { likeToast } from '../../services/toastService';
+const userId = '6611b07e9cfbe6f8dd06cfe5';
+
+export default function ToastCard({ id, name, location, gear, timestamp, username, description, likes }) {
+    const [likesList, setLikesList] = useState(likes);
     const date = new Date(timestamp);
+
+    const clickLikeToast = async () => {
+        try {
+            const likeChange = likesList.find((l) => l === userId) !== undefined ? 0 : 1;
+            await likeToast(id, likeChange, userId);
+
+            if (likeChange) {
+                setLikesList([...likesList, userId]);
+                console.log('likeLists', likesList);
+            } else {
+                const idx = likesList.indexOf(userId);
+                const newLikes = [...likesList];
+                newLikes.splice(idx);
+                setLikesList(newLikes);
+                console.log('likeLists', likesList);
+            }
+        } catch (e) {
+
+        }
+    };
+    console.log('isLiked', likesList.find((l) => l === userId) !== undefined);
     return(
     <div className="card w-full h-64 bg-base-100 shadow-xl my-6">
         <div className="card-body">
@@ -27,12 +53,15 @@ export default function ToastCard({ name, location, gear, timestamp, username, d
                         tabIndex={0}
                         role="button"
                         className="btn btn-ghost btn-circle"
+                        onClick={clickLikeToast}
                     >
                         <figure className="w-12">
-                            <TestSvg />
+                            {
+                                likesList.find((l) => l === userId) !== undefined ? <LikedToastSvg /> : <UnlikedToastSvg />
+                            }
                         </figure>
                     </div>
-                    <p>{likes.length}</p>
+                    <p>{likesList.length}</p>
                 </div>
             </div>
             <p className="text-left">{description}</p>

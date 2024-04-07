@@ -7,7 +7,7 @@ export default function ToastList({ toasts }) {
         <div className="px-16">
             {
                 toasts && toasts.map((t) => {
-                    return <ToastCard name={t.toasteeName} location={t.location} timestamp={t.updatedAt} gear={t.arcteryxProduct} likes={t.likes} username={t.toasterName} description={t.content} />
+                    return <ToastCard id={t._id} name={t.toasteeName} location={t.location} timestamp={t.updatedAt} gear={t.arcteryxProduct} likes={t.likes} username={t.toasterName} description={t.content} />
                 })
             }
         </div>
