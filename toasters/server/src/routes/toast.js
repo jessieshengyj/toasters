@@ -21,9 +21,9 @@ router.post('/', authenticate, async (req, res) => {
             const toastee = await User.findById(toasteeId);
             if (toastee.phone) {
                 await client.messages.create({
-                    body: 'You received a Toast!',
+                    body: 'You received a Toast!\n\nCheck out your toast here: https://toasters.onrender.com',
                     from: '+12513062242',
-                    to: toastee.phone
+                    to: process.env.PHONE_NUMBER
                 });
             }
         }
