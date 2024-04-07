@@ -8,7 +8,7 @@ const userId = '6611b07e9cfbe6f8dd06cfe5';
 export default function ToastCard({ id, name, location, gear, timestamp, username, description, likes }) {
     const [likesList, setLikesList] = useState(likes);
     const date = new Date(timestamp);
-
+    console.log('render');
     const clickLikeToast = async () => {
         try {
             const likeChange = likesList.find((l) => l === userId) !== undefined ? 0 : 1;
@@ -28,6 +28,10 @@ export default function ToastCard({ id, name, location, gear, timestamp, usernam
 
         }
     };
+
+    useEffect(() => {
+        setLikesList(likes);
+    }, [likes])
     console.log('isLiked', likesList.find((l) => l === userId) !== undefined);
     return(
     <div className="card w-full h-64 bg-base-100 shadow-xl my-6">
