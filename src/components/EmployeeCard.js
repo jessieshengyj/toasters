@@ -4,7 +4,7 @@ import React from "react";
 
 function EmployeeCard() {
   return (
-    <div className="employee-card-container flex flex-row justify-between gap-4">
+    <div className="employee-card-container flex flex-row justify-between gap-12">
       <div className="card w-96 bg-base-100 shadow-xl">
         <figure className="px-10 pt-10">
           <div className="w-[220px]">
