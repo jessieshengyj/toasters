@@ -28,6 +28,14 @@
   color: #61dafb;
 }
 
+p {
+  font-family: Raleway;
+}
+
+h2 {
+  font-family: Raleway;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
