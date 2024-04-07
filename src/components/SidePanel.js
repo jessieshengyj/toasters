@@ -1,42 +1,42 @@
 import "./SidePanel.css";
-import Dashboard from "./Dashboard";
-function SidePanel() {
+import { ReactComponent as ToastSvg } from "../icons/a-toast.svg";
+import { useEffect, useState } from "react";
+
+function SidePanel({ setSelectedTab }) {
+  const [selectedTabIndex, setSelectedTabIndex] = useState(0);
+
+  useEffect(() => {
+    setSelectedTab(selectedTabIndex);
+  }, [selectedTabIndex]);
+
   return (
-    <div className="side-panel-left">
-      <div className="drawer lg:drawer-open">
-        <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-        <div className="drawer-content flex flex-col">
-          {/* Page content here */}
-          {/*<label*/}
-          {/*  htmlFor="my-drawer-2"*/}
-          {/*  className="btn btn-primary drawer-button lg:hidden"*/}
-          {/*>*/}
-          {/*  Open drawer*/}
-          {/*</label>*/}
-          <Dashboard />
+    <div className="side-panel w-72 overflow-auto fixed">
+      <ul className="menu p-4 w-72 min-h-full bg-white text-base-content toast-font">
+        <div className="side-panel-header side-panel-title overflow-hidden">
+          <span>Toasters</span>
         </div>
-        <div className="drawer-side">
-          <label
-            htmlFor="my-drawer-2"
-            aria-label="close sidebar"
-            className="drawer-overlay"
-          ></label>
-          <ul className="menu p-4 w-72 min-h-full bg-white text-base-content toast-font">
-            {/* Sidebar content here */}
-            <div className="side-panel-header side-panel-title">
-              <span>Toasters</span>
-            </div>
-            <div className="side-panel-buttons">
-              <li>
-                <button>Home</button>
-              </li>
-              <li>
-                <button>My Toasts</button>
-              </li>
-            </div>
-          </ul>
+        <div className="side-panel-buttons">
+          <li>
+            <button
+              className={`${selectedTabIndex === 0 ? "btn-toast-active" : ""}`}
+              onClick={() => setSelectedTabIndex(0)}
+            >
+              Home
+            </button>
+          </li>
+          <li>
+            <button
+              className={`${selectedTabIndex === 1 ? "btn-toast-active" : ""}`}
+              onClick={() => setSelectedTabIndex(1)}
+            >
+              My Toasts
+            </button>
+          </li>
+          <figure className="w-10 pt-12">
+            <ToastSvg />
+          </figure>
         </div>
-      </div>
+      </ul>
     </div>
   );
 }
