@@ -3,7 +3,7 @@ function Navbar() {
   return (
     <div className="navbar bg-base-100 sticky top-0">
       <div className="flex-1">
-        <a className="font-semibold text-xl toast-font dashboard-title">
+        <a className="font-semibold text-xl toast-font dashboard-title pl-4">
           Dashboard
         </a>
       </div>
