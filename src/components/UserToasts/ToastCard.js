@@ -1,7 +1,8 @@
 import React from 'react';
 import { ReactComponent as TestSvg } from "../../icons/toast-upvote-icon.svg";
 
-export default function ToastCard({ name, location, gear, timestamp, username, description }) {
+export default function ToastCard({ name, location, gear, timestamp, username, description, likes }) {
+    const date = new Date(timestamp);
     return(
     <div className="card w-full h-64 bg-base-100 shadow-xl my-6">
         <div className="card-body">
@@ -17,7 +18,7 @@ export default function ToastCard({ name, location, gear, timestamp, username, d
                     <h2 className="card-title pb-4">{ name ? `${name} - ` : '' }{location}</h2>
                     <div className="flex">
                         <p className="text-left">{username}</p>
-                        <p className="text-left">{timestamp}</p>
+                        <p className="text-left">{date.toUTCString().split(' ').slice(0, 4).join(' ')}</p>
                         <p className="text-left">{gear}</p>
                     </div>
                 </div>
@@ -31,7 +32,7 @@ export default function ToastCard({ name, location, gear, timestamp, username, d
                             <TestSvg />
                         </figure>
                     </div>
-                    <p>150</p>
+                    <p>{likes.length}</p>
                 </div>
             </div>
             <p className="text-left">{description}</p>
