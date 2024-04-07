@@ -34,6 +34,10 @@ const UserSchema = new Schema(
     phone: {
       type: String,
       required: true
+    },
+    experience: {
+      type: String,
+      enum: ['Beginner', 'Intermediate', 'Advanced']
     }
   },
   { timestamps: true },

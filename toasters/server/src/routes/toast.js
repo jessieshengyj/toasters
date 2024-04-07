@@ -8,9 +8,11 @@ const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUT;
 console.log(accountSid);
 const client = require('twilio')(accountSid, authToken);
+const authenticate = require('../middleware/auth');
 
-router.post('/', async (req, res) => {
-    const { toasterId, toasteeId, content, arcteryxProduct, arcteryxStore } = req.body;
+router.post('/', authenticate, async (req, res) => {
+    const { toasteeId, content, arcteryxProduct, arcteryxStore } = req.body;
+    const toasterId = req.user._id;
 
     try {
         const toast = await Toast.create({ toasterId, toasteeId, content, arcteryxProduct, arcteryxStore });
@@ -31,8 +33,8 @@ router.post('/', async (req, res) => {
     }
 });
 
-router.get('/', async (req, res) => {
-    const userId = req.query.userId;
+router.get('/', authenticate, async (req, res) => {
+    const userId = req.user._id;
     let toasts;
 
     if (userId) {
@@ -55,18 +57,21 @@ router.get('/', async (req, res) => {
         } else {
             toastee = { firstName: 'Unkown' };
         }
-        t.toasterName = toaster.firstName;
-        t.toasteeName = toastee.firstName;
 
-        return { ...t["_doc"], toasterName: toaster.firstName, toasteeName: toastee.firstName };
+        t.toasterName = toaster.firstName;
+        t.toasterExperience = toaster.experience;
+        t.toasteeName = toastee.firstName;
+        console.log(t, 't');
+        return { ...t["_doc"], toasterName: toaster.firstName, toasteeName: toastee.firstName, toasterExperience: toaster.experience, toasterUsername: toaster.username };
     });
     
     res.status(200).send(toasts);
 });
 
-router.patch('/:id', async (req, res) => {
+router.patch('/:id', authenticate, async (req, res) => {
     const toastId = req.params.id;
-    const { userId, like } = req.body;
+    const { like } = req.body;
+    const userId = req.user._id;
 
     try {
         if (like === 1) {
@@ -81,7 +86,7 @@ router.patch('/:id', async (req, res) => {
     }
 })
 
-router.patch('/:id/viewed', async (req, res) => {
+router.patch('/:id/viewed', authenticate, async (req, res) => {
     const toastId = req.params.id;
     try {
         await Toast.findByIdAndUpdate(toastId, { viewed: true }, { new: true });

@@ -1,13 +1,20 @@
 const express = require('express');
 const router = express.Router();
+const jwt = require('jsonwebtoken');
 
 const User = require('../models/userModel');
 
-router.post('/', async (req, res) => {
-    const { firstName, lastName, occupation, company, username, password, phone } = req.body;
+const generateToken = (_id) => jwt.sign({ _id }, process.env.JWT_SECRET, {
+    expiresIn: '30d',
+  });
 
-    const user = await User.create({ firstName, lastName, occupation, company, username, password, phone });
-    res.status(201).send(user._id);
+router.post('/', async (req, res) => {
+    console.log('here');
+    const { firstName, lastName, occupation, company, username, password, phone, experience } = req.body;
+    console.log('body', req.body);
+    const user = await User.create({ firstName, lastName, occupation, company, username, password, phone, experience });
+    console.log('createdUser', user);
+    res.status(201).send({ token: generateToken(user._id) });
 });
 
 router.get('/', async (req, res) => {

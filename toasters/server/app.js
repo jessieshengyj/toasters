@@ -9,6 +9,7 @@ mongoose.connection.on('connected', () => {
 });
 const toastRoute = require('./src/routes/toast');
 const userRoute = require('./src/routes/user');
+const authRoute = require('./src/routes/auth');
 
 const app = express();
 const port = process.env.PORT || 3001;
@@ -21,6 +22,7 @@ app.use(cors(corsOptions));
 app.use(express.json());
 app.use('/toast', toastRoute);
 app.use('/user', userRoute);
+app.use('/auth', authRoute);
 
 app.get('/', (req, res) => {
   res.send('Server connection established!');

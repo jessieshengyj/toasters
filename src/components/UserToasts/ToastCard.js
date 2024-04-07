@@ -5,10 +5,10 @@ import { ReactComponent as LikedToastSvg } from "../../icons/liked-toast.svg";
 import { likeToast } from '../../services/toastService';
 const userId = '6611b07e9cfbe6f8dd06cfe5';
 
-export default function ToastCard({ id, name, location, gear, timestamp, username, description, likes }) {
+export default function ToastCard({ id, name, location, gear, timestamp, username, description, likes, experience, toasterUsername }) {
     const [likesList, setLikesList] = useState(likes);
     const date = new Date(timestamp);
-    console.log('render');
+    console.log('experience', experience);
     const clickLikeToast = async () => {
         try {
             const likeChange = likesList.find((l) => l === userId) !== undefined ? 0 : 1;
@@ -47,9 +47,10 @@ export default function ToastCard({ id, name, location, gear, timestamp, usernam
                 <div className="flex-1 pl-10">
                     <h2 className="card-title pb-4">{ name ? `${name} - ` : '' }{location}</h2>
                     <div className="flex">
-                        <p className="text-left">{username}</p>
+                        <p className="text-left">{toasterUsername}</p>
                         <p className="text-left">{date.toUTCString().split(' ').slice(0, 4).join(' ')}</p>
                         <p className="text-left">{gear}</p>
+                        <p className="text-left">{experience}</p>
                     </div>
                 </div>
                 <div>

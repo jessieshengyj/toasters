@@ -1,5 +1,12 @@
 import "./Navbar.css";
+import { useNavigate } from "react-router-dom";
 function Navbar() {
+  const navigate = useNavigate();
+  const logout = () => {
+    localStorage.removeItem('jwt');
+    navigate('/login');
+  }
+
   return (
     <div className="navbar bg-base-100">
       <div className="flex-1">
@@ -98,7 +105,7 @@ function Navbar() {
               <a>Settings</a>
             </li>
             <li>
-              <a>Logout</a>
+              <a onClick={logout}>Logout</a>
             </li>
           </ul>
         </div>
