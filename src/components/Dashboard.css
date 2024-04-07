@@ -10,12 +10,12 @@
 }
 
 .btn-new {
-    @apply justify-center;
+    @apply justify-center h-10;
     border-radius: 94px;
     font-weight: 700;
-    font-size: 30px;
-    padding-left: 20px;
-    padding-right: 20px;
+    font-size: 20px;
+    padding-left: 25px;
+    padding-right: 25px;
 
     &:hover {
         border-radius: 94px;
@@ -26,5 +26,17 @@
     &:active {
         background-color: #ff710b !important;
         color: white !important;
+    }
+}
+
+.btn-option-container {
+    @apply flex pl-12 pr-12 justify-between;
+
+    .btn-left {
+        @apply flex gap-4;
+    }
+
+    .btn-right {
+
     }
 }

@@ -31,9 +31,6 @@ function SidePanel() {
                 <button>Home</button>
               </li>
               <li>
-                <button>Friends</button>
-              </li>
-              <li>
                 <button>My Toasts</button>
               </li>
             </div>
