@@ -4,11 +4,31 @@ const router = express.Router();
 const Toast = require('../models/toastModel');
 const User = require('../models/userModel');
 
+const accountSid = process.env.TWILIO_ACCOUNT_SID;
+const authToken = process.env.TWILIO_AUT;
+console.log(accountSid);
+const client = require('twilio')(accountSid, authToken);
+
 router.post('/', async (req, res) => {
     const { toasterId, toasteeId, content, arcteryxProduct, arcteryxStore } = req.body;
 
-    const toast = await Toast.create({ toasterId, toasteeId, content, arcteryxProduct, arcteryxStore });
-    res.status(201).send(toast._id);
+    try {
+        const toast = await Toast.create({ toasterId, toasteeId, content, arcteryxProduct, arcteryxStore });
+
+        if (toasteeId) {
+            const toastee = await User.findById(toasteeId);
+
+            await client.messages.create({
+                body: 'You received a Toast!',
+                from: '+12513062242',
+                to: toastee.phone
+            });
+        }
+        res.status(201).send(toast._id);
+    } catch (error) {
+        console.error('Error sending message:', error);
+        res.sendStatus(400);
+    }
 });
 
 router.get('/', async (req, res) => {

@@ -30,6 +30,10 @@ const UserSchema = new Schema(
     password: {
         type: String,
         required: [true, 'Username is required']
+    },
+    phone: {
+      type: String,
+      required: true
     }
   },
   { timestamps: true },
