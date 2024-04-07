@@ -1,7 +1,7 @@
 import "./Navbar.css";
 function Navbar() {
   return (
-    <div className="navbar bg-base-100">
+    <div className="navbar bg-base-100 sticky top-0">
       <div className="flex-1">
         <a className="btn btn-ghost text-xl toast-font dashboard-title">
           Dashboard

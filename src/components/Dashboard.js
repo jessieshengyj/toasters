@@ -7,6 +7,7 @@ import ToastList from "./UserToasts/ToastList";
 import CreateToastModal from "./CreateToastModal";
 import { getToasts } from "../services/toastService";
 
+
 function Dashboard() {
   const [toasts, setToasts] = useState([]);
   const [newToast, setNewToast] = useState("");
@@ -50,7 +51,7 @@ function Dashboard() {
   console.log(toasts);
 
   return (
-    <div className="toast-dashboard">
+    <div className="toast-dashboard ml-72">
       <Navbar />
       <div className="toast-body-container">
         <EmployeeHighlights />
@@ -87,6 +88,7 @@ function Dashboard() {
         </div>
         {}
         <ToastList toasts={toasts} />
+
       </div>
     </div>
   );

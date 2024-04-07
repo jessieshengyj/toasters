@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
@@ -10,32 +10,31 @@ const ToastSchema = new Schema(
     },
     toasterId: {
       type: String,
-      required: [true, 'Please add a toaster'],
+      required: [true, "Please add a toaster"],
     },
     toasteeId: {
       type: String,
-      default: ''
+      default: "",
     },
     arcteryxProduct: {
       type: String,
-      required: [true, 'Please specify an arcteryx product']
     },
     arcteryxStore: {
-      type: String
+      type: String,
     },
     content: {
-        type: String
+      type: String,
     },
     likes: {
       type: [String],
-      default: []
+      default: [],
     },
     viewed: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   { timestamps: true },
 );
 
-module.exports = mongoose.model('Toast', ToastSchema);
+module.exports = mongoose.model("Toast", ToastSchema);
